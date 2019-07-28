@@ -89,7 +89,7 @@ describe('FolderRotate', function() {
     const conf = {
       maxSize: 1,
       orderBy: 'date_birthtime',
-      orderDir: 'asc',
+      orderDir: 'desc',
       path: testFolder,
       unit: 'qty'
     };
@@ -105,13 +105,19 @@ describe('FolderRotate', function() {
     });
   });
 
-  it('should throw for invalid files or directories', async() => {
+  it('should throw for invalid files, directories or predicates', async() => {
     await assertThrowsAsync(async() => {
       await FolderRotate.statFileAsync('invalid:///file.bla');
     });
 
     await assertThrowsAsync(async() => {
       await FolderRotate.getFilesAsync('/invalid-dir/', f => true);
+    });
+
+    await assertThrowsAsync(async() => {
+      await FolderRotate.getFilesAsync(__dirname, file => {
+        throw new Error('test123');
+      });
     });
   });
 
@@ -141,6 +147,12 @@ describe('FolderRotate', function() {
     let f = await fr.rotate(true);
     assert.strictEqual(f.length, 1);
     assert.strictEqual(f[0].name, 'ase');
+    // reverse order:
+    conf.orderDir = 'desc';
+    f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'asd');
+    conf.orderDir = 'asc';
     
     conf.orderBy = 'size';
     f = await fr.rotate(true);
@@ -161,6 +173,44 @@ describe('FolderRotate', function() {
     conf.maxSize = 190;
     f = await fr.rotate(true);
     assert.strictEqual(f.length, 0);
+  });
+
+  it('it should support reversing the order of files well', async() => {
+    /** @type {RotateConfig} */
+    const conf = {
+      maxSize: 2,
+      orderBy: 'date_birthtime',
+      orderDir: 'asc',
+      path: testFolder,
+      unit: 'qty'
+    };
+
+    const fr = new FolderRotate(conf);
+
+    await createFile('asd', 10);
+    await timeout(25);
+    await createFile('ase', 20);
+    await timeout(25);
+    await createFile('asf', 30);
+
+    let f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'asf');
+
+    conf.orderBy = 'date_mtime';
+    f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'asf');
+
+    conf.orderBy = 'date_atime';
+    f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'asf');
+
+    conf.orderBy = 'size';
+    f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'asf');
   });
 
   it('should delete the right files if sorted by any of the times', async() => {
@@ -185,6 +235,12 @@ describe('FolderRotate', function() {
     let f = await fr.rotate(true);
     assert.strictEqual(f.length, 1);
     assert.strictEqual(f[0].name, 'asd');
+    // reverse order:
+    conf.orderDir = 'desc';
+    f = await fr.rotate(true);
+    assert.strictEqual(f.length, 1);
+    assert.strictEqual(f[0].name, 'ase');
+    conf.orderDir = 'asc';
 
     conf.orderBy = 'date_mtime';
     f = await fr.rotate(true);
