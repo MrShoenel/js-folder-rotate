@@ -16,7 +16,7 @@ FolderRotate (or: folder-rotate) is a universal module for Node.js for rotating 
 
 Options:
   -v, --version                      output the version number
-  -p, --path <path>                  The Path to the directory to delete files in. Note that
+  -p, --path &lt;path&gt;                  The Path to the directory to delete files in. Note that
                                      FolderRotate only considers files, never folders and thus
                                      also never works recursively.
   -r, --regex [regex]                Optional. Defaults to '.*' with flag 'i' (matches all files,
@@ -25,21 +25,21 @@ Options:
                                      never be selected for deletion. You should pass in a literal
                                      regular expression, that ends with flags, e.g. '/^my_files.+?
                                      \.(?:js|css)$/i'.
-  -b, --orderBy <orderBy>            One of "size", "name", "date_atime", "date_mtime", "date_ctime",
+  -b, --orderBy &lt;orderBy&gt;            One of "size", "name", "date_atime", "date_mtime", "date_ctime",
                                      "date_birthtime". Define what to order the selected files by.
-  -d, --orderDir <orderDir>          One of "asc", "desc". Define the direction of the order for the
+  -d, --orderDir &lt;orderDir&gt;          One of "asc", "desc". Define the direction of the order for the
                                      selected files. Deletion of files ALWAYS HAPPENS AT THE END of
                                      that ordered list (delete excess). E.g. if the oldest files
                                      should be deleted, you probably want orderBy="date_birthtime"
                                      and orderDir="desc" (because the newest files have the largest
                                      timestamps and would be at the beginning of the descendingly
                                      ordered list).
-  -m, --maxSize <maxSize>            Define the maximum size for the list of selected files. maxSize
+  -m, --maxSize &lt;maxSize&gt;            Define the maximum size for the list of selected files. maxSize
                                      depends on the selected unit (e.g. "mb" or "qty"). The ordered
                                      list of selected files will be truncated at the end until maxSize
                                      is less than or equal to the value defined here. Truncation means
                                      deletion.
-  -u, --rotationUnit <rotationUnit>  One of "b", "kb", "mb", "gb", "tb", "qty". Defines the unit for
+  -u, --rotationUnit &lt;rotationUnit&gt;  One of "b", "kb", "mb", "gb", "tb", "qty". Defines the unit for
                                      "maxSize". "b" through "tb" are sizes (byte, kilobyte, .., terabyte)
                                      and are powers of 1e3, not 2^10 (i.e. one kb is 1,000 bytes and one
                                      mb is 1,000 kb), because SI-2 units do not make sense in this context
