@@ -19,3 +19,12 @@
  * @property {number} maxSize Define the maximum size for the list of selected files. maxSize depends on the selected unit (e.g. 'mb' or 'qty'). The ordered list of selected files will be truncated at the end until maxSize is less than or equal to the value defined here. Truncation means deletion.
  * @property {RotationUnit} unit Defines the unit for 'maxSize'. 'b' through 'tb' are sizes (byte, kilobyte, .., terabyte) and are powers of 1e3, not 2^10 (i.e. one kb is 1,000 bytes and one mb is 1,000 kb), because SI-2 units do not make sense in this context (no, they don't).
  */
+
+
+/**
+ * @typedef FileNameWithStat
+ * @type {Object}
+ * @property {string} name
+ * @property {string} absPath
+ * @property {Stats} stat
+ */
