@@ -12,7 +12,8 @@ Here is how to run FF-FingerPrinter from CLI:
 <pre>node ./cli/cli.js -h
 Usage: cli [options]
 
-FolderRotate (or: folder-rotate) is a universal module for Node.js for rotating folders (restricting them to a certain size). The restrictions can be set per folder using certain rules.
+FolderRotate (or: folder-rotate) is a universal module for Node.js for rotating folders (restricting
+them to a certain size). The restrictions can be set per folder using certain rules.
 
 Options:
   -v, --version                      output the version number
