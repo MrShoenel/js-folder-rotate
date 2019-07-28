@@ -1,6 +1,6 @@
 {
   "name": "sh.folder-rotate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A tool to rotate folders and restrict them to a certain size, using various methods to do so.",
   "main": "index.js",
   "scripts": {
@@ -19,14 +19,11 @@
     "url": "https://github.com/MrShoenel/js-folder-rotate/issues"
   },
   "homepage": "https://github.com/MrShoenel/js-folder-rotate#readme",
-  "dependencies": {
-    "sh.misc-tools": "^0.2.3"
-  },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "fs-extra": "^7.0.0",
-    "mocha": "^5.2.0",
-    "nyc": "^12.0.2",
-    "sh.orchestration-tools": "^2.20.0"
+    "chai": "^4.2.0",
+    "fs-extra": "^8.1.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "sh.orchestration-tools": "^2.24.0"
   }
 }
