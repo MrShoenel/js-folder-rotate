@@ -1,6 +1,6 @@
 {
   "name": "sh.folder-rotate",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A tool to rotate folders and restrict them to a certain size, using various methods to do so.",
   "main": "index.js",
   "scripts": {
