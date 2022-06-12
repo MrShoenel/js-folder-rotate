@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/MrShoenel/js-folder-rotate#readme",
   "dependencies": {
-    "fs-extra": "^9.*"
+    "fs-extra": "^10.0.0"
   },
   "devDependencies": {
     "chai": "^4.*",
